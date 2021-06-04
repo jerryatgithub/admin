@@ -1,21 +1,3 @@
-/*
-
-=========================================================
-* Volt Free - Bootstrap 5 Dashboard
-=========================================================
-
-* Product Page: https://themesberg.com/product/admin-dashboard/volt-premium-bootstrap-5-dashboard
-* Copyright 2020 Themesberg (https://www.themesberg.com)
-* License (https://themesberg.com/licensing)
-
-* Designed and coded by https://themesberg.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. Please contact us to request a removal.
-
-*/
-
 var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync').create();
 var cleanCss = require('gulp-clean-css');
@@ -28,6 +10,7 @@ var sass = require('gulp-sass');
 var wait = require('gulp-wait');
 var sourcemaps = require('gulp-sourcemaps');
 var fileinclude = require('gulp-file-include');
+var strip = require('gulp-strip-comments');
 
 // Define paths
 
@@ -38,6 +21,7 @@ const paths = {
         html: './dist/pages',
         assets: './dist/assets',
         img: './dist/assets/img',
+        js: './dist/assets/js',
         vendor: './dist/vendor'
     },
     dev: {
@@ -73,7 +57,7 @@ const paths = {
 
 // Compile SCSS
 gulp.task('scss', function () {
-    return gulp.src([paths.src.scss + '/custom/**/*.scss', paths.src.scss + '/volt/**/*.scss', paths.src.scss + '/volt.scss'])
+    return gulp.src([paths.src.scss + '/custom/**/*.scss', paths.src.scss + '/style/**/*.scss', paths.src.scss + '/style.scss'])
         .pipe(wait(500))
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
@@ -119,7 +103,7 @@ gulp.task('assets', function () {
 
 gulp.task('vendor', function() {
     return gulp.src(npmDist(), { base: paths.src.node_modules })
-      .pipe(gulp.dest(paths.temp.vendor));
+        .pipe(gulp.dest(paths.temp.vendor));
 });
 
 gulp.task('serve', gulp.series('scss', 'html', 'index', 'assets', 'vendor', function() {
@@ -127,7 +111,7 @@ gulp.task('serve', gulp.series('scss', 'html', 'index', 'assets', 'vendor', func
         server: paths.temp.base
     });
 
-    gulp.watch([paths.src.scss + '/volt/**/*.scss', paths.src.scss + '/custom/**/*.scss', paths.src.scss + '/volt.scss'], gulp.series('scss'));
+    gulp.watch([paths.src.scss + '/style/**/*.scss', paths.src.scss + '/custom/**/*.scss', paths.src.scss + '/style.scss'], gulp.series('scss'));
     gulp.watch([paths.src.html, paths.src.base + '*.html', paths.src.partials], gulp.series('html', 'index'));
     gulp.watch([paths.src.assets], gulp.series('assets'));
     gulp.watch([paths.src.vendor], gulp.series('vendor'));
@@ -136,7 +120,7 @@ gulp.task('serve', gulp.series('scss', 'html', 'index', 'assets', 'vendor', func
 // Beautify CSS
 gulp.task('beautify:css', function () {
     return gulp.src([
-        paths.dev.css + '/volt.css'
+        paths.dev.css + '/style.css'
     ])
         .pipe(cssbeautify())
         .pipe(gulp.dest(paths.dev.css))
@@ -145,7 +129,7 @@ gulp.task('beautify:css', function () {
 // Minify CSS
 gulp.task('minify:css', function () {
     return gulp.src([
-        paths.dist.css + '/volt.css'
+        paths.dist.css + '/style.css'
     ])
     .pipe(cleanCss())
     .pipe(gulp.dest(paths.dist.css))
@@ -193,7 +177,7 @@ gulp.task('clean:dev', function () {
 
 // Compile and copy scss/css
 gulp.task('copy:dist:css', function () {
-    return gulp.src([paths.src.scss + '/volt/**/*.scss', paths.src.scss + '/custom/**/*.scss', paths.src.scss + '/volt.scss'])
+    return gulp.src([paths.src.scss + '/style/**/*.scss', paths.src.scss + '/custom/**/*.scss', paths.src.scss + '/style.scss'])
         .pipe(wait(500))
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
@@ -205,7 +189,7 @@ gulp.task('copy:dist:css', function () {
 });
 
 gulp.task('copy:dev:css', function () {
-    return gulp.src([paths.src.scss + '/volt/**/*.scss', paths.src.scss + '/custom/**/*.scss', paths.src.scss + '/volt.scss'])
+    return gulp.src([paths.src.scss + '/style/**/*.scss', paths.src.scss + '/custom/**/*.scss', paths.src.scss + '/style.scss'])
         .pipe(wait(500))
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
@@ -266,6 +250,60 @@ gulp.task('copy:dev:html:index', function () {
         .pipe(gulp.dest(paths.dev.base))
 });
 
+// Remove strip comments
+gulp.task('remove:comments', function () {
+    return gulp.src([paths.dist.html + '/**/*.html'])
+        .pipe(strip())
+        .pipe(fileinclude({
+            prefix: '@@',
+            basepath: './src/partials/',
+            context: {
+                environment: 'development'
+            }
+        }))
+        .pipe(gulp.dest(paths.dist.html));
+});
+
+gulp.task('remove:comments:index', function () {
+    return gulp.src([paths.dist.base + '*.html'])
+        .pipe(strip())
+        .pipe(fileinclude({
+            prefix: '@@',
+            basepath: './src/partials/',
+            context: {
+                environment: 'development'
+            }
+        }))
+        .pipe(gulp.dest(paths.dist.base));
+});
+
+gulp.task('remove:comments:js', function () {
+    return gulp.src([paths.dist.js + '/**/*.js'])
+        .pipe(strip())
+        .pipe(fileinclude({
+            prefix: '@@',
+            basepath: './src/partials/',
+            context: {
+                environment: 'development'
+            }
+        }))
+        .pipe(gulp.dest(paths.dist.js));
+});
+
+// uglify
+// gulp.task('uglify', function () {
+//     return gulp.src([paths.dist.js + '/**/*.js'])
+//         .pipe(uglify())
+//         .pipe(fileinclude({
+//             prefix: '@@',
+//             basepath: './src/assets/',
+//             context: {
+//                 environment: 'development'
+//             }
+//         }))
+//         .pipe(gulp.dest(paths.dist.js));
+// });
+
 // Copy assets
 gulp.task('copy:dist:assets', function () {
     return gulp.src(paths.src.assets)
@@ -280,16 +318,16 @@ gulp.task('copy:dev:assets', function () {
 // Copy node_modules to vendor
 gulp.task('copy:dist:vendor', function() {
     return gulp.src(npmDist(), { base: paths.src.node_modules })
-      .pipe(gulp.dest(paths.dist.vendor));
+        .pipe(gulp.dest(paths.dist.vendor));
 });
 
 gulp.task('copy:dev:vendor', function() {
     return gulp.src(npmDist(), { base: paths.src.node_modules })
-      .pipe(gulp.dest(paths.dev.vendor));
+        .pipe(gulp.dest(paths.dev.vendor));
 });
 
 gulp.task('build:dev', gulp.series('clean:dev', 'copy:dev:css', 'copy:dev:html', 'copy:dev:html:index', 'copy:dev:assets', 'beautify:css', 'copy:dev:vendor'));
-gulp.task('build:dist', gulp.series('clean:dist', 'copy:dist:css', 'copy:dist:html', 'copy:dist:html:index', 'copy:dist:assets', 'minify:css', 'minify:html', 'minify:html:index', 'copy:dist:vendor'));
+gulp.task('build:dist', gulp.series('clean:dist', 'copy:dist:css', 'copy:dist:html', 'copy:dist:html:index', 'copy:dist:assets', 'minify:css', 'minify:html', 'minify:html:index', 'remove:comments', 'remove:comments:index', 'remove:comments:js', 'copy:dist:vendor'));
 
 // Default
 gulp.task('default', gulp.series('serve'));
