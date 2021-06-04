@@ -10,18 +10,18 @@
 
 <body>
 
-        @@include('./dashboard/_nav.html', {
+        @@include('./_nav.html', {
             "path": ".."
         })
         
-        @@include('./dashboard/_sidenav.html', {
+        @@include('./_sidenav.html', {
             "path": "..",
             "page": "settings"
         })
     
         <main class="content">
 
-            @@include('./dashboard/_topbar.html', {
+            @@include('./_topbar.html', {
                 "path": ".."
             })
 
@@ -246,7 +246,7 @@
                     </div>
                 </div>
             </div>
-            @@include('./dashboard/_footer.html', {
+            @@include('./_footer.html', {
                 "path": "..",
                 "classes": "text-dark"
             })

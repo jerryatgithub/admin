@@ -10,18 +10,18 @@
 
 <body>
 
-        @@include('./dashboard/_nav.html', {
+        @@include('./_nav.html', {
             "path": "../.."
         })
 
-        @@include('./dashboard/_sidenav.html', {
+        @@include('./_sidenav.html', {
             "path": "../..",
             "page": "tables"
         })
     
         <main class="content">
 
-            @@include('./dashboard/_topbar.html', {
+            @@include('./_topbar.html', {
                 "path": "../.."
             })
 
@@ -37,9 +37,6 @@
                     <div class="mb-3 mb-lg-0">
                         <h1 class="h4">Bootstrap tables</h1>
                         <p class="mb-0">Dozens of reusable components built to provide buttons, alerts, popovers, and more.</p>
-                    </div>
-                    <div>
-                        <a href="https://themesberg.com/docs/volt-bootstrap-5-dashboard/components/tables/" class="btn btn-outline-gray"><i class="far fa-question-circle me-1"></i> Bootstrap Tables Docs</a>
                     </div>
                 </div>
             </div>
@@ -419,7 +416,7 @@
                     </div>
                 </div>
             </div>
-            @@include('./dashboard/_footer.html', {
+            @@include('./_footer.html', {
                 "path": "../..",
                 "classes": "bg-dark text-white"
             })

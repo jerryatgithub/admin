@@ -70,13 +70,13 @@ $tertiary : #2CA58D !default;
 
 // Series names and colors. This can be extended or customized as desired. Just add more series and colors.
 $ct-series-names: (a, b, c, d, e, f, g) !default !default;
-$ct-series-colors: (#262B40,
-    #F8BD7A,
+$ct-series-colors: ($primary,
+    $secondary,
     #2CA58D,
     #31316A,
     #C96480,
     #ffffff,
-    #F8BD7A,
+    $secondary,
 
 ) !default;
 
@@ -701,8 +701,7 @@ $btn-font-size-lg: $input-btn-font-size-lg !default;
 $btn-border-width: $input-btn-border-width !default;
 
 $btn-font-weight: $font-weight-bold !default;
-$btn-box-shadow : inset 0 1px 0 rgba($white, .15),
-0 1px 1px rgba($black, .075) !default;
+$btn-box-shadow : 0 1px 1px rgba($black, .075) !default;
 $btn-focus-width      : $input-btn-focus-width !default;
 $btn-focus-box-shadow : $input-btn-focus-box-shadow !default;
 $btn-disabled-opacity : .65 !default;

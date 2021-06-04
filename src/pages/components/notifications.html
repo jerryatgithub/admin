@@ -10,11 +10,11 @@
 
 <body>
 
-        @@include('./dashboard/_nav.html', {
+        @@include('./_nav.html', {
             "path": "../.."
         })
 
-        @@include('./dashboard/_sidenav.html', {
+        @@include('./_sidenav.html', {
             "path": "../..",
             "page": "notifications",
             "page_group": "components"
@@ -22,7 +22,7 @@
     
         <main class="content">
 
-            @@include('./dashboard/_topbar.html', {
+            @@include('./_topbar.html', {
                 "path": "../.."
             })
 
@@ -47,7 +47,6 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h2 class="h4 mb-0">Sweet alerts</h2>
-                            <a href="https://themesberg.com/docs/volt-bootstrap-5-dashboard/plugins/sweet-alerts/" class="btn btn-outline-gray"><i class="far fa-question-circle me-1"></i> Documentation</a>
                         </div>
                         <div class="card-body">
                             <button class="btn btn-dark" id="basicAlert">Basic alert</button>
@@ -63,7 +62,6 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h2 class="h4 mb-0">Notyf</h2>
-                            <a href="https://themesberg.com/docs/volt-bootstrap-5-dashboard/plugins/notifications/" class="btn btn-outline-gray"><i class="far fa-question-circle me-1"></i> Documentation</a>
                         </div>
                         <div class="card-body">
                             <button class="btn btn-info" id="notifyTopLeft">Top left info</button>
@@ -75,7 +73,7 @@
                 </div>
             </div>
 
-            @@include('./dashboard/_footer.html', {
+            @@include('./_footer.html', {
                 "path": "../..",
                 "classes": "bg-dark text-white"
             })

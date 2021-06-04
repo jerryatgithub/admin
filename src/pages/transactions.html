@@ -10,30 +10,23 @@
 
 <body>
 
-        @@include('./dashboard/_nav.html', {
+        @@include('./_nav.html', {
             "path": ".."
         })
 
-        @@include('./dashboard/_sidenav.html', {
+        @@include('./_sidenav.html', {
             "path": "..",
             "page": "transactions"
         })
     
         <main class="content">
 
-            @@include('./dashboard/_topbar.html', {
+            @@include('./_topbar.html', {
                 "path": ".."
             })
 
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
                 <div class="d-block mb-4 mb-md-0">
-                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-                        <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                          <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
-                          <li class="breadcrumb-item"><a href="#">Volt</a></li>
-                          <li class="breadcrumb-item active" aria-current="page">Transactions</li>
-                        </ol>
-                    </nav>
                     <h2 class="h4">All Orders</h2>
                     <p class="mb-0">Your web analytics dashboard template.</p>
                 </div>
@@ -416,7 +409,7 @@
                     <div class="fw-bold small d-none d-lg-block">Showing <b>5</b> out of <b>25</b> entries</div>
                 </div>
             </div>
-            @@include('./dashboard/_footer.html', {
+            @@include('./_footer.html', {
                 "path": "..",
                 "classes": "text-dark"
             })
