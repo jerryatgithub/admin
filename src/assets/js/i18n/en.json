@@ -2,6 +2,7 @@
     "sidenav": {
         "admintitle": "Kakar+ Cloud Admin",
         "dashboard": "Dashboard",
+        "store": "Store",
         "datatable": "Datatable"
     }
 }
