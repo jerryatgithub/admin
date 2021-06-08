@@ -4,7 +4,7 @@
 <head> 
     @@include('./_head.html', {
         "path": "../..",
-        "title": "Dashboard - Bootstrap Tables"
+        "title": "卡+微管雲 - 商品類別"
     })
 </head>
 
@@ -16,8 +16,8 @@
 
         @@include('./_sidenav.html', {
             "path": "../..",
-            "page_group": "kds_group",
-            "page": "kds-machine"
+            "page_group": "basic_group",
+            "page": "product_category"
         })
     
         <main class="content">
@@ -27,8 +27,21 @@
             })
 
             <div class="table-settings my-3">
-                <div class="row align-items-center justify-content-end">
-                    <div class="col col-md-6 col-lg-3 col-xl-4">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <ul class="nav project-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">副頁籤</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">副頁籤</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">副頁籤</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-3">
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon2"><span class="fas fa-search"></span></span>
                             <input type="text" class="form-control" id="exampleInputIconLeft" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">

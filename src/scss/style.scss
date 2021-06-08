@@ -67,3 +67,21 @@
 @import "style/components";
 
 // write your custom styles here!
+.project-tabs {
+	.nav-link {
+		color: $gray-500;
+		position: relative;
+		&.active, &:hover {
+			color: $primary;
+			&::after {
+				content: "";
+				position: absolute;
+				height: 2px;
+				background-color: $primary;
+				width: 100%;
+				bottom: 0;
+				left: 0;
+			}
+		}
+	}
+}
