@@ -55,6 +55,16 @@
                 <span class="sidebar-text">商品資料</span>
               </a>
             </li>
+            <li class="nav-item @@if (context.page === 'taste') { active }">
+              <a class="nav-link" href="@@path/pages/basic/taste.html">
+                <span class="sidebar-text">口味</span>
+              </a>
+            </li>
+            <li class="nav-item @@if (context.page === 'topping') { active }">
+              <a class="nav-link" href="@@path/pages/basic/topping.html">
+                <span class="sidebar-text">加料</span>
+              </a>
+            </li>
           </ul>
         </div>
       </li>
